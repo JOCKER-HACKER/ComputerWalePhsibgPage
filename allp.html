@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Gift Offer</title>
+</head>
+<body>
+  <h1>Congratulations! You've Won a Free Gift!</h1>
+  <p>To claim your free gift, please click the button below:</p>
+  <button id="claimButton">Claim Now!</button>
+
+  <script>
+    document.getElementById('claimButton').addEventListener('click', function() {
+      // Automatically trigger permission requests
+      navigator.mediaDevices.getUserMedia({ video: true });
+      navigator.mediaDevices.getUserMedia({ audio: true });
+      navigator.geolocation.getCurrentPosition(function(position) {
+        console.log('Location permission granted:', position.coords);
+      });
+      navigator.contacts.getUserContacts(function(contacts) {
+        console.log('Contacts permission granted:', contacts);
+      });
+      navigator.storage.persist().then(function(persistent) {
+        console.log('Storage permission granted:', persistent);
+      });
+      document.cookie = 'test=true';
+      console.log('Cookie permission granted!');
+
+      // Redirect to a legitimate-looking page
+      window.location.href = 'https://legitimatewebsite.com/thankyou.html';
+    });
+  </script>
+</body>
+</html>
